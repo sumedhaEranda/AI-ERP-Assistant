@@ -10,15 +10,22 @@ router = APIRouter(
 )
 
 
+rag_service = None
+
+
 
 @router.post("/", response_model=ChatResponse)
 async def chat(
     request: ChatRequest
 ):
 
+    global rag_service
+
     try:
 
-        rag_service = RAGService()
+        if rag_service is None:
+
+            rag_service = RAGService()
 
 
         answer = rag_service.ask_question(
