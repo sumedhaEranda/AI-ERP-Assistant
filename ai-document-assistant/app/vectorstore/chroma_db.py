@@ -10,7 +10,7 @@ def get_embedding_model():
 
     return HuggingFaceEmbeddings(
 
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
+        model_name="BAAI/bge-small-en-v1.5"
 
     )
 
@@ -46,7 +46,7 @@ def save_documents(documents):
 
 
 
-    for doc in documents:
+    for index, doc in enumerate(documents):
 
 
         texts.append(
@@ -71,10 +71,7 @@ def save_documents(documents):
             ),
 
             "chunk_id":
-            doc.get(
-                "chunk_id",
-                0
-            )
+            index
 
         })
 
